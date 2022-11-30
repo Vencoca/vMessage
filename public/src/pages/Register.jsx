@@ -1,15 +1,64 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import Logo from "../assets/logo.svg"
-
+import Logo from "../assets/logo.svg";
+import {ToastContainer,toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { registerRoute } from '../utils/APIRoutes';
 function Register() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const [values,setValues]=useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassowrd: "",
+  });
+  const toastOptions = {
+    position:"bottom-right",
+    autoClose:8000,
+    pauseOnHover:true,
+    draggable: true,
+    theme: 'dark',
+    }
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert("form");
+    if(handleValidation()){
+      console.log("in validation");
+      const {password,username,email} = values;
+      const {data} = await axios.post(registerRoute, {
+        username,
+        email,
+        password,
+      });
+      if(data.status===false){
+        toast.error(data.msg, toastOptions);
+      } else {
+        localStorage.setItem('chat-app-user',JSON.stringify(data.user));
+        navigate("/");
+      } 
+    };
   }
   const handleChange = (event) => {
+    setValues({...values,[event.target.name]:event.target.value});
+  }
 
+  const handleValidation = (event) => {
+    const {password,confirmPassword,username,email} = values;
+    if(password !== confirmPassword){
+      toast.error("Password and confirm password should be same!", toastOptions);
+      return false;
+    } else if (username.length < 3) {
+      toast.error("Username should be longer than 3 chars!", toastOptions);
+      return false;
+    } else if (password.length < 8){
+      toast.error("Username should be longer than 8 chars!", toastOptions);
+      return false;
+    } else if (email === ""){
+      toast.error("Email cant be empty!", toastOptions);
+      return false;
+    }
+    return true;
   }
 
   return (
@@ -25,9 +74,10 @@ function Register() {
           <input type="password" placeholder='Password' name='password' onChange={e=>handleChange(e)}/>
           <input type="password" placeholder='Confirm password' name='confirmPassword' onChange={e=>handleChange(e)}/>
           <button type='submit'>Create User</button>
-          <span>Already have an account? <Link to={"/login"}>Login</Link></span>
+          <span>Already have an account?<Link to={"/login"}> Login</Link></span>
         </form>
       </FormContainer>
+      <ToastContainer/>
     </>
   )
 }
@@ -68,6 +118,22 @@ const FormContainer = styled.div`
       border-radius: 0.4rem;
       color: white;
 
+    }
+    button {
+      padding: 1rem;
+      border-radius: 0.4rem;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    span{
+      color: white;
+      display: flex;
+      justify-content: center;
+      a{
+        color: wheat;
+        padding-left: 10px;
+      }
     }
   }
 `;
