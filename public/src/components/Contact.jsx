@@ -67,6 +67,10 @@ const Container = styled.div`
   background-color: #2f2b26;
   .brand {
     display: flex;
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      gap: 0rem;
+    }
     align-items: center;
     gap: 1rem;
     justify-content: center;
@@ -93,6 +97,9 @@ const Container = styled.div`
       }
     }
     .contact {
+      @media screen and (max-width: 600px) {
+        flex-direction: column;
+      }
       background-color: #3b3732;
       min-height: 5rem;
       cursor: pointer;

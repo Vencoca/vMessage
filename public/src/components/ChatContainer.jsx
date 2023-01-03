@@ -160,6 +160,11 @@ const Container = styled.div`
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }
+        @media screen and (max-width: 600px) {
+          padding: 0.3rem;
+          border: 2px solid;
+          border-color: #ec8c10;
+        }
       }
     }
     .sended {

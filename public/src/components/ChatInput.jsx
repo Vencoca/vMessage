@@ -56,6 +56,10 @@ display: grid;
     padding: 0 1rem;
     gap: 1rem;
   }
+  @media screen and (max-width: 600px) {
+        padding: 0.0rem 0.5rem;
+        grid-template-columns: 12% 88%;
+  }
   .button-container {
     display: flex;
     align-items: center;
@@ -63,6 +67,7 @@ display: grid;
     gap: 1rem;
     .emoji {
       position: relative;
+      
       svg {
         font-size: 1.5rem;
         color: yellow;
@@ -93,6 +98,9 @@ display: grid;
     }
   }
   .input-container {
+    @media screen and (max-width: 600px) {
+      gap: 0rem;
+    }
     width: 100%;
     border-radius: 2rem;
     display: flex;
@@ -107,6 +115,9 @@ display: grid;
       border: none;
       padding-left: 1rem;
       font-size: 1.2rem;
+      @media screen and (max-width: 600px) {
+        font-size: 0.8rem;
+      }
       &::selection {
         background-color: #ec8c10;
       }
@@ -128,9 +139,15 @@ display: grid;
           font-size: 1rem;
         }
       }
+      @media screen and (max-width: 600px) {
+        padding: 0.3rem 0.5rem;
+      }
       svg {
         font-size: 2rem;
         color: white;
+        @media screen and (max-width: 600px) {
+          font-size: 1.4rem;
+        }
       }
     }
   }

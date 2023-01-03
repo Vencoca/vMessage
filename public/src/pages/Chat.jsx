@@ -71,6 +71,22 @@ const Container = styled.div`
   gap: 1rem;
   background-color: #6482d4;
   .container{
+    @media screen and (max-width: 600px) {
+      height: 100vh;
+      width: 100vw;
+      h1{
+        font-size: 20px;
+      }
+      h2 {
+        font-size: 15px;
+      }
+      h3 {
+        font-size: 10px;
+      }
+      p {
+        font-size: 11px;
+      }
+    }
     height: 85vh;
     width: 85vw;
     background-color: #3b3b3b;
