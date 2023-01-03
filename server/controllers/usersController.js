@@ -65,3 +65,7 @@ module.exports.getAllUsers = async (req,res,next) => {
     }
     
 };
+
+module.exports.test = async (req,res,next) => {
+    return res.json({msg:"TEST", status:false});
+}
