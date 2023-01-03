@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
-import Messages from "./Messages";
 import {v4 as uuidv4} from "uuid";
 
 export default function ChatContainer({currentChat,currentUser, socket}) {
@@ -40,7 +39,7 @@ export default function ChatContainer({currentChat,currentUser, socket}) {
       message: msg,
     });
 
-    const msgs = [... messages];
+    const msgs = [...messages];
     msgs.push({fromSelf:true, message:msg});
     setMessages(msgs);
   };
@@ -114,12 +113,14 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    background-color: #ffffff39;
     .user-details {
       display: flex;
       align-items: center;
       gap: 1rem;
       .avatar {
         img {
+          padding-top: 5px;
           height: 3rem;
         }
       }
@@ -153,7 +154,9 @@ const Container = styled.div`
         padding: 1rem;
         font-size: 1.1rem;
         border-radius: 1rem;
-        color: #d1d1d1;
+        border: 3px solid;
+        border-color: #ec8c10;
+        color: black;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }
@@ -162,13 +165,13 @@ const Container = styled.div`
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: #4f04ff21;
+        background-color: white;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #9900ff20;
+        background-color: white;
       }
     }
   }
